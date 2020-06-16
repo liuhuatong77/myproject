@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load device_type_tags %}
+{% load device_active_tags %}
+{% block title %}
+{{ room.room_name }}
+{% endblock %}
+
+{% block script %}
+<script>
+  var aaa = JSON.parse('{{ dl|safe }}');
+  if (aaa.length!==0){
+      for(let i=0;i<aaa.length;i++){
+          alert(aaa[i])
+      }
+  }
+</script>
+{% endblock %}
+
+{% block content %}
+     <div class="container-fluid">
+          <h1 class="text-center text-primary">{{room.room_name}}</h1>
+     <table class="table  table-bordered table-hover">
+         <thead>
+         <tr>
+             <th>名称</th>
+             <th>开启或关闭</th>
+             <th>状态</th>
+             <th>温度</th>
+             <th>更新</th>
+             <th>删除</th>
+         </tr>
+         </thead>
+         <tbody>
+              {% for i in devices %}
+            <tr>
+                <th>{{ i.device_name }}</th>
+                <th>{{ i.isactive | device_active_tags }}</th>
+                <th>{{ i.status | device_type_tags }}</th>
+                <th>{{ i.temperature }}</th>
+                <th><a href="{% url 'device_update' i.id %}"><button type="button" class="btn btn-primary">更新</button></a></th>
+                <th> <a href="{% url 'device_delete' i.id %}"><button type="button" class="btn btn-primary">删除</button></a></th>
+            </tr>
+                 {% endfor %}
+         </tbody>
+     </table>
+     <a href="{% url 'device_add' room.pk %}"><button type="button" class="btn btn-primary">新增设备</button></a>
+     </div>
+{% endblock %}
+

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>{% block title %} 标题{% endblock %}</title>
+      {% block script %}
+    {% endblock %}
+  </head>
+  <body>
+
+    <div class="container-fluid">
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'room_all' %}">首页</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'room_add' %}">新增机房</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'alarmlog_all' %}">警报记录</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'handle_all' %}">故障预警</a></li>
+           <li class="breadcrumb-item"><a href="{% url 'handle_add' %}">新增故障预警方式</a></li>
+      {% if request.user.username %}
+        <li class="breadcrumb-item active text-right" aria-current="page"><a href="{% url 'logout' %}">{{ request.user.username  }}:退出登陆</a></li>
+          {% else %}
+            <li class="breadcrumb-item"><a href="{% url 'register' %}">注册</a></li>
+      {% endif  %}
+  </ol>
+</nav>
+
+
+
+    {% block content %}
+    {% endblock %}
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>

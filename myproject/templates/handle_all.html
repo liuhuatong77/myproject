@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load handle_notice_tags %}
+{% load handle_causetype_tags %}
+{% block title %}
+警报处理方法
+{% endblock %}
+{% block content %}
+     <div class="container-fluid">
+     <table class="table  table-bordered table-hover">
+         <thead>
+         <tr>
+             <th>编号</th>
+             <th>预警方式</th>
+             <th>机器故障类型</th>
+             <th>更新</th>
+             <th>删除</th>
+         </tr>
+         </thead>
+         <tbody>
+              {% for i in handles %}
+            <tr>
+                <th>{{ i.pk }}</th>
+                <th>{{ i.handel_method | handle_notice_tags}}</th>
+                <th>{{ i.handel_cause | handle_causetype_tags }}</th>
+                <th><a href="{% url 'handle_update' i.pk %}"><button type="button" class="btn btn-primary">更新</button></a></th>
+                <th> <a href="{% url 'handle_delete' i.pk %}"><button type="button" class="btn btn-primary">删除</button></a></th>
+            </tr>
+                 {% endfor %}
+         </tbody>
+     </table>
+{% endblock %}
+
+{% block script %}
+  <script type="text/javascript">
+
+ </script>
+{% endblock %}

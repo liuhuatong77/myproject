@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}
+机房列表
+{% endblock %}
+{% block content %}
+     <h1 class="text-primary text-center">机房列表</h1>
+    {% for i in rooms %}
+        <a href="{% url 'device_all' i.id %}"><button type="button" class="btn btn-primary">{{ i.room_name }}</button> </a>
+    {% endfor %}
+{% endblock %}
